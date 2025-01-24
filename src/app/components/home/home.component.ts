@@ -12,10 +12,20 @@ import { CompaniesService } from '../../service/companies.service';
 })
 export class HomeComponent implements OnInit {
   Companies: Companies[] = [];
+  filteredCompanies: any[] = [];
+
   constructor(private companiesService: CompaniesService) {}
+
+  trackByFn(index: number, company: any): number {
+    return company.id;
+  }
 
   ngOnInit(): void {
     this.getCompanies();
+
+    this.filteredCompanies = this.Companies.filter(
+      (company) => company.solicitante && company.empresa
+    );
   }
 
   getCompanies(): void {
