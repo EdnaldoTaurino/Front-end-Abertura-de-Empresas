@@ -1,0 +1,45 @@
+header {
+  width: 100vw; /* Força largura total da viewport */
+  background-color: #c3cfd9;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 2rem 2rem;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: #007bff;
+}
+
+.title {
+  color: #007bff;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-container {
+  margin-right: 0;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
