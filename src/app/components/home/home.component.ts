@@ -5,12 +5,13 @@ import { CompaniesService } from '../../service/companies.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MaskCpfPipe, MaskCepPipe } from '../../../pipes/mask-cpf.pipe';
 import axios from 'axios';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, FormsModule],
+  imports: [HeaderComponent, FormsModule, MaskCpfPipe, MaskCepPipe],
   providers: [CompaniesService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],

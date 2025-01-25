@@ -1,59 +1,97 @@
-# Empresas
+# Teste Vox Tecnologia
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+## Descrição do Projeto
 
-## Development server
+Este projeto foi desenvolvido utilizando o **Angular 19**, explorando as novidades da versão, como as novas sintaxes (`@if`, `@for`) e aplicando boas práticas de clean code e organização de componentes. O objetivo foi criar uma aplicação funcional e com uma estrutura limpa e escalável, seguindo as diretrizes propostas.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## Funcionalidades Implementadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 1. **Novidades do Angular 19**
 
-## Code scaffolding
+- Utilização das novas sintaxes `@if` e `@for` para melhorar a legibilidade do código.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 2. **Estrutura de Telas**
 
-```bash
-ng generate component component-name
-```
+- **Tela Home**: Página inicial com um layout funcional.
+- **MenuNav (Header)**: Navegação integrada no topo.
+- **Tela de Registro**: Funciona tanto para criação quanto para edição de registros (pré-preenchimento quando um ID é fornecido).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 3. **Código Limpo**
 
-```bash
-ng generate --help
-```
+- Componentes devidamente separados.
+- Tipagem de interfaces para garantir maior segurança e previsibilidade no desenvolvimento.
 
-## Building
+### 4. **Máscaras**
 
-To build the project run:
+- Adicionadas máscaras para **CPF** e **CEP**.
 
-```bash
-ng build
-```
+### 5. **Validações**
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Utilização do **ZOD** para validações simples e eficientes.
 
-## Running unit tests
+### 6. **Chamadas HTTP**
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- Configuração do **Axios** para realizar as requisições ao backend.
 
-```bash
-ng test
-```
+### 7. **UUID**
 
-## Running end-to-end tests
+- Implementação de UUID para geração de IDs randômicos, garantindo maior segurança.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## Melhorias Realizadas
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- **UUID para IDs randômicos mais seguros**.
+- **Máscaras** para **CPF** e **CEP**.
+- **Validações** com **ZOD**.
+- **Chamadas HTTP** com **Axios**.
 
-## Additional Resources
+- Sugestão de melhorias:
+  - Alteração de algumas chamadas HTTP de **PATCH** para **PUT**, dependendo da necessidade de envio de dados (caso apenas um campo precise ser atualizado, o **PATCH** seria ideal).
+  - Uso de bibliotecas modernas de UI para facilitar a implementação e melhorar a aparência visual da aplicação.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## Funcionalidades Não Implementadas
+
+Conforme solicitado, o foco foi dado ao bom funcionamento dos elementos e à proximidade do layout proposto. Algumas funcionalidades e bibliotecas não foram incluídas para evitar poluição do código:
+
+- **Rota PUT e DELETE**: Não implementadas, pois não foram solicitadas no escopo do projeto.
+- **Bibliotecas Adicionais**: Algumas bibliotecas interessantes não foram utilizadas para manter o projeto limpo.
+
+---
+
+## Como Executar o Projeto
+
+### Pré-requisitos
+
+- Node.js 20
+- Angular CLI 19
+
+### Passos para executar
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone
+   ```
+
+2. **Instale as dependências:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Inicie o servidor:**
+
+   ```bash
+   npm run mock
+   ```
+
+   **Acesse a aplicação:**
+
+   ```bash
+   npm run start
+   ```

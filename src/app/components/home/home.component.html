@@ -38,8 +38,8 @@
     <!-- Coluna Direita (50%) -->
     @if (selectedCompany) {
     <div class="col-md-6">
-      <div class="d-flex align-items-center mb-3">
-        <h5 class="mb-0 text-primary">Detalhes do pedido</h5>
+      <div class="d-flex align-items-center mb-4 ms-4">
+        <h5 class="mb-0">Detalhes do pedido</h5>
         <button
           class="btn btn-secondary ms-auto"
           (click)="editarEmpresa(selectedCompany)"
@@ -47,17 +47,20 @@
           <i class="bi bi-pencil"></i> Editar
         </button>
       </div>
-      <div class="border-start border-primary border-3 ps-3">
-        <p class="mb-1">
-          <strong>Nome da Empresa:</strong>
-          {{ selectedCompany.empresa.ds_nome_fantasia }}
-        </p>
+      <div class="border-start border-primary border-3 ps-3"> <!-- Borda azul -->
+        <div class="d-flex align-items-center mb-4 ml-4">
+          <div class="icon-container">
+            <i class="bi-person-fill"></i>
+          </div>
+          <p class="mb-1 ms-3 fs-4">Nome da Empresa</p>
+        </div>
         <p class="mb-1">
           <strong>Responsável:</strong>
-          {{ selectedCompany.empresa.ds_nome_fantasia }}
+          {{ selectedCompany.solicitante.ds_responsavel }}
         </p>
         <p class="mb-1">
-          <strong>CPF:</strong> {{ selectedCompany.solicitante.nu_cpf }}
+          <strong>CPF:</strong>
+          {{ selectedCompany.solicitante.nu_cpf | maskCpf }}
         </p>
         <p class="mb-1">
           <strong>Endereço:</strong>
@@ -72,7 +75,8 @@
           {{ selectedCompany.empresa.endereco.ds_municipio }}
         </p>
         <p class="mb-1">
-          <strong>CEP:</strong> {{ selectedCompany.empresa.endereco.co_cep }}
+          <strong>CEP:</strong>
+          {{ selectedCompany.empresa.endereco.co_cep | maskCep }}
         </p>
         <p class="mb-1">
           <strong>Complemento:</strong>
