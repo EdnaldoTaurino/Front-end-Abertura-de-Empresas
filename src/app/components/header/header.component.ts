@@ -13,7 +13,11 @@ export class HeaderComponent {
   constructor(private router: Router) {}
 
   hideButton(): boolean {
-    return this.router.url === '/home' || this.router.url === '/';
+    return this.router.url === '/';
+  }
+
+  hideEditcompany(): boolean {
+    return this.router.url === '/' || this.router.url === '/';
   }
 
   navigateToRegister() {

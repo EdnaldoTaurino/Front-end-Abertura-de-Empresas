@@ -3,7 +3,11 @@
     <div class="header-container">
       <div class="header-content">
         <img src="vox-logo.png" alt="VOX" class="logo" />
+        @if(hideEditcompany()){
         <h2 class="title">Pedidos de Abertura da empresa</h2>
+        }@else{
+        <h2 class="title">Pedidos de Edição da empresa</h2>
+        }
       </div>
       @if (hideButton()) {
       <div class="button-container">
