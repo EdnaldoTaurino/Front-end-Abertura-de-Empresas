@@ -1,0 +1,96 @@
+<div class="container mt-4">
+  <h2>Editar Empresa</h2>
+  <form [formGroup]="companyForm" (ngSubmit)="salvarEdicao()">
+    <div class="form-group">
+      <label for="ds_nome_fantasia">Nome da Empresa</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ds_nome_fantasia"
+        formControlName="ds_nome_fantasia"
+      />
+    </div>
+    <div class="form-group">
+      <label for="ds_responsavel">Responsável</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ds_responsavel"
+        formControlName="ds_responsavel"
+      />
+    </div>
+    <div class="form-group">
+      <label for="nu_cpf">CPF</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nu_cpf"
+        formControlName="nu_cpf"
+      />
+    </div>
+    <div class="form-group">
+      <label for="ds_logradouro">Endereço</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ds_logradouro"
+        formControlName="ds_logradouro"
+      />
+    </div>
+    <div class="form-group">
+      <label for="ds_bairro">Bairro</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ds_bairro"
+        formControlName="ds_bairro"
+      />
+    </div>
+    <div class="form-group">
+      <label for="ds_municipio">Cidade</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ds_municipio"
+        formControlName="ds_municipio"
+      />
+    </div>
+    <div class="form-group">
+      <label for="co_cep">CEP</label>
+      <input
+        type="text"
+        class="form-control"
+        id="co_cep"
+        formControlName="co_cep"
+      />
+    </div>
+    <div class="form-group">
+      <label for="ds_complemento">Complemento</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ds_complemento"
+        formControlName="ds_complemento"
+      />
+    </div>
+    <div class="form-group">
+      <label for="co_uf">UF</label>
+      <input
+        type="text"
+        class="form-control"
+        id="co_uf"
+        formControlName="co_uf"
+      />
+    </div>
+    <div class="form-group">
+      <label for="co_numero">Número</label>
+      <input
+        type="text"
+        class="form-control"
+        id="co_numero"
+        formControlName="co_numero"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
+</div>

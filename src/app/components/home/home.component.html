@@ -1,29 +1,89 @@
-<app-header />
+<app-header></app-header>
 <div class="container mt-4">
-  @if (filteredCompanies.length > 0) { @for (company of filteredCompanies; track
-  company.id) {
-  <div class="card mb-3">
-    <div class="card-body p-3">
-      <div class="d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <div class="icon-container">
-            <i class="bi-person-fill"></i>
-          </div>
-          <div class="ms-3">
-            <div>{{ company.solicitante.ds_responsavel }}</div>
-            <div>{{ company.empresa.ds_nome_fantasia }}</div>
+  <div class="row">
+    <div class="col-md-6">
+      @if (filteredCompanies.length > 0) { @for (company of filteredCompanies;
+      track $index) {
+      <div class="card mb-3">
+        <div class="card-body p-3">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="icon-container">
+                <i class="bi-person-fill"></i>
+              </div>
+              <div class="ms-3">
+                <div>
+                  <strong>{{ company.solicitante.ds_responsavel }}</strong>
+                </div>
+                <div>{{ company.empresa.ds_nome_fantasia }}</div>
+              </div>
+            </div>
+            <button
+              class="btn btn-primary ms-auto"
+              (click)="visualizarEmpresa(company)"
+            >
+              <i class="bi bi-eye me-2"></i>
+              Visualizar
+            </button>
           </div>
         </div>
-        <button class="btn btn-primary">
-          <i class="bi bi-eye me-2"></i>
-          Visualizar
+      </div>
+      } } @else {
+      <div class="alert alert-info">
+        Nenhuma empresa cadastrada, Clique em solicitar abertura.
+      </div>
+      }
+    </div>
+
+    <!-- Coluna Direita (50%) -->
+    @if (selectedCompany) {
+    <div class="col-md-6">
+      <div class="d-flex align-items-center mb-3">
+        <h5 class="mb-0 text-primary">Detalhes do pedido</h5>
+        <button class="btn btn-secondary ms-auto" (click)="editarEmpresa()">
+          <i class="bi bi-pencil"></i> Editar
         </button>
       </div>
+      <div class="border-start border-primary border-3 ps-3">
+        <p class="mb-1">
+          <strong>Nome da Empresa:</strong>
+          {{ selectedCompany.empresa.ds_nome_fantasia }}
+        </p>
+        <p class="mb-1">
+          <strong>Responsável:</strong>
+          {{ selectedCompany.empresa.ds_nome_fantasia }}
+        </p>
+        <p class="mb-1">
+          <strong>CPF:</strong> {{ selectedCompany.solicitante.nu_cpf }}
+        </p>
+        <p class="mb-1">
+          <strong>Endereço:</strong>
+          {{ selectedCompany.empresa.endereco.ds_logradouro }}
+        </p>
+        <p class="mb-1">
+          <strong>Bairro:</strong>
+          {{ selectedCompany.empresa.endereco.ds_bairro }}
+        </p>
+        <p class="mb-1">
+          <strong>Cidade:</strong>
+          {{ selectedCompany.empresa.endereco.ds_municipio }}
+        </p>
+        <p class="mb-1">
+          <strong>CEP:</strong> {{ selectedCompany.empresa.endereco.co_cep }}
+        </p>
+        <p class="mb-1">
+          <strong>Complemento:</strong>
+          {{ selectedCompany.empresa.endereco.ds_complemento }}
+        </p>
+        <p class="mb-1">
+          <strong>UF:</strong> {{ selectedCompany.empresa.endereco.co_uf }}
+        </p>
+        <p class="mb-1">
+          <strong>Número:</strong>
+          {{ selectedCompany.empresa.endereco.co_numero }}
+        </p>
+      </div>
     </div>
+    }
   </div>
-  } } @else {
-  <div class="alert alert-info">
-    Nenhuma empresa cadastrada, Clique em solicitar abertura.
-  </div>
-  }
 </div>

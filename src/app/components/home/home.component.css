@@ -12,3 +12,11 @@
   font-size: 1.5rem;
   color: #9eadba;
 }
+
+.container {
+  max-width: 90%;
+}
+
+.card {
+  margin-left: 0;
+}
