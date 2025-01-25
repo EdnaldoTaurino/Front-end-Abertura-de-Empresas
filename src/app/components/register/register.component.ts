@@ -6,18 +6,29 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  ValidatorFn,
+  ValidationErrors,
+  AbstractControl,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import axios from 'axios';
 import { z } from 'zod';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [HeaderComponent, CommonModule, ReactiveFormsModule, ModalModule],
-  providers: [BsModalService],
+  imports: [
+    HeaderComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    ModalModule,
+    NgxMaskDirective,
+  ],
+  providers: [BsModalService, provideNgxMask()],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
@@ -40,9 +51,9 @@ export class RegisterComponent implements OnInit {
       nu_cpf: ['', Validators.required],
       date_nascimento: ['', Validators.required],
       ds_nome_fantasia: ['', Validators.required],
-      co_entidade_registro: [0, Validators.required],
-      // co_natureza_juridica: ['', Validators.required],
-      co_cep: [0, Validators.required],
+      co_entidade_registro: [0, [Validators.required, this.numberValidator()]],
+      co_natureza_juridica: ['', Validators.required],
+      co_cep: ['', [Validators.required, this.numberValidator()]],
       ds_logradouro: ['', Validators.required],
       co_numero: ['', Validators.required],
       ds_complemento: [''],
@@ -89,6 +100,13 @@ export class RegisterComponent implements OnInit {
       });
   }
 
+  numberValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      return isNaN(value) ? { notNumber: 'O valor deve ser um número.' } : null;
+    };
+  }
+
   validateForm(): boolean {
     const schema = z.object({
       id: z.union([z.string(), z.number()]).optional(),
@@ -102,7 +120,7 @@ export class RegisterComponent implements OnInit {
       //     invalid_type_error: 'Este campo deve ser um número.',
       //   })
       //   .optional(),
-      co_cep: z.union([z.string(), z.number()]).transform((val) => Number(val)),
+      co_cep: z.number().nonnegative('O CEP deve ser um número não negativo.'),
       ds_logradouro: z.string().nonempty('Este campo é obrigatório.'),
       co_numero: z.string().optional(),
       ds_complemento: z.union([z.string(), z.null()]).optional(),
@@ -132,7 +150,7 @@ export class RegisterComponent implements OnInit {
   onSubmit(template: TemplateRef<any>): void {
     if (this.validateForm()) {
       const formData = {
-        id: this.registerForm.value.id,
+        id: this.registerForm.value.id || this.generateId(),
         solicitante: {
           ds_responsavel: this.registerForm.value.ds_responsavel,
           nu_cpf: this.registerForm.value.nu_cpf,
@@ -247,5 +265,9 @@ export class RegisterComponent implements OnInit {
   isFieldInvalid(field: string): boolean {
     const control = this.registerForm.get(field);
     return control ? control.invalid && control.touched : false;
+  }
+
+  generateId(): string {
+    return uuidv4();
   }
 }

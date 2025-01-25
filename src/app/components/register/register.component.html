@@ -25,6 +25,8 @@
           class="form-control"
           id="nu_cpf"
           formControlName="nu_cpf"
+          placeholder="999.999.999-99"
+          mask="000.000.000-00"
         />
         <div class="text-danger">
           {{ validationErrors["nu_cpf"] }}
@@ -37,6 +39,7 @@
           class="form-control"
           id="date_nascimento"
           formControlName="date_nascimento"
+          placeholder="DD/MM/AAAA"
         />
         <div class="text-danger">
           {{ validationErrors["date_nascimento"] }}
@@ -89,10 +92,11 @@
         <h2>Endereço da empresa</h2>
         <label for="co_cep" class="form-label">CEP</label>
         <input
-          type="text"
+          type="number"
           class="form-control"
           id="co_cep"
           formControlName="co_cep"
+          placeholder="99999-999"
         />
         <div class="text-danger">
           {{ validationErrors["co_cep"] }}
@@ -165,23 +169,20 @@
 
 <!-- Modal -->
 <ng-template #template>
-  <div class="modal-header">
-    <h5 class="modal-title">Sucesso</h5>
-    <button
-      type="button"
-      class="btn-close"
-      aria-label="Close"
-      (click)="closeModalAndNavigate()"
-    ></button>
-  </div>
-  <div class="modal-body">Solicitação cadastrada com sucesso!</div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary"
-      (click)="closeModalAndNavigate()"
-    >
-      Fechar
-    </button>
+  <div class="modal-content rounded-3 border-0 shadow-sm">
+    <div class="modal-header bg-white rounded-top p-3">
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="closeModalAndNavigate()"
+      ></button>
+    </div>
+    <div class="modal-body p-5 text-center">
+      <i class="bi bi-check-circle-fill text-success fs-1"></i>
+      <p class="mb-0 text-dark mt-3">
+        Sua solicitação foi cadastrada com sucesso!
+      </p>
+    </div>
   </div>
 </ng-template>
