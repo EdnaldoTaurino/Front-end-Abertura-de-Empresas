@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
     axios
       .get<Companies[]>('http://localhost:3000/empresas')
       .then((response) => {
-        console.log('Dados recebidos via GET: ', response.data);
         this.companies = response.data.filter(
           (company) =>
             company.solicitante?.ds_responsavel &&

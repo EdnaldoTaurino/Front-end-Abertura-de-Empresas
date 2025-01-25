@@ -90,7 +90,7 @@
     <div class="col-md-5">
       <div class="mb-3">
         <h2>Endereço da empresa</h2>
-        <label for="co_cep" class="form-label">CEP</label>
+        <label for="co_cep" class="form-label">CEP*</label>
         <input
           type="number"
           class="form-control"
@@ -127,7 +127,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="ds_complemento" class="form-label">Complemento</label>
+        <label for="ds_complemento" class="form-label">Complemento*</label>
         <input
           type="text"
           class="form-control"
@@ -151,7 +151,7 @@
       <div class="mb-3">
         <label for="co_uf" class="form-label">Estado*</label>
         <select class="form-control" id="co_uf" formControlName="co_uf">
-          <option value="">Select a state</option>
+          <option value="">Selecione um estado</option>
           <option *ngFor="let estado of estados" [value]="estado.sigla">
             {{ estado.nome }}
           </option>

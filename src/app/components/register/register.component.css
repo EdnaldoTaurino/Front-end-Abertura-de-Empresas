@@ -1,4 +1,3 @@
-/* Estilização básica para o formulário */
 form {
   max-width: 900px;
   margin: 0 auto;
@@ -8,7 +7,6 @@ form {
   background-color: #f9f9f9;
 }
 
-/* Estilização para a linha de separação */
 .border-start {
   border-left-width: 3px !important;
 }

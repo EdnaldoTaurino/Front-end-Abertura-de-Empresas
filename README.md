@@ -60,6 +60,7 @@ Conforme solicitado, o foco foi dado ao bom funcionamento dos elementos e à pro
 
 - **Rota PUT e DELETE**: Não implementadas, pois não foram solicitadas no escopo do projeto.
 - **Bibliotecas Adicionais**: Algumas bibliotecas interessantes não foram utilizadas para manter o projeto limpo.
+- **Campo número**: Não implementado, pois não foi especificado no escopo do projeto.
 
 ---
 

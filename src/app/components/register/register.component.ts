@@ -115,11 +115,6 @@ export class RegisterComponent implements OnInit {
       date_nascimento: z.string().nonempty('Este campo é obrigatório.'),
       ds_nome_fantasia: z.string().nonempty('Este campo é obrigatório.'),
       co_entidade_registro: z.number().nonnegative('Este campo é obrigatório.'),
-      // co_natureza_juridica: z
-      //   .number({
-      //     invalid_type_error: 'Este campo deve ser um número.',
-      //   })
-      //   .optional(),
       co_cep: z.number().nonnegative('O CEP deve ser um número não negativo.'),
       ds_logradouro: z.string().nonempty('Este campo é obrigatório.'),
       co_numero: z.string().optional(),
@@ -159,9 +154,8 @@ export class RegisterComponent implements OnInit {
         empresa: {
           ds_nome_fantasia: this.registerForm.value.ds_nome_fantasia,
           co_entidade_registro: this.registerForm.value.co_entidade_registro,
-          // co_natureza_juridica: this.registerForm.value.co_natureza_juridica,
           endereco: {
-            co_cep: this.registerForm.value.co_cep,
+            co_cep: Number(this.registerForm.value.co_cep),
             ds_logradouro: this.registerForm.value.ds_logradouro,
             co_numero: this.registerForm.value.co_numero,
             ds_complemento: this.registerForm.value.ds_complemento,
@@ -173,14 +167,12 @@ export class RegisterComponent implements OnInit {
       };
 
       const companyId = this.registerForm.value.id;
-      console.log('Company ID:', companyId);
 
       if (companyId) {
         // Atualizar empresa existente
         axios
           .put(`http://localhost:3000/empresas/${companyId}`, formData)
           .then((response) => {
-            console.log('Dados atualizados com sucesso: ', response.data);
             this.openModal(template);
           })
           .catch((error) => {
@@ -191,7 +183,6 @@ export class RegisterComponent implements OnInit {
         axios
           .post('http://localhost:3000/empresas', formData)
           .then((response) => {
-            console.log('Dados enviados com sucesso: ', response.data);
             this.openModal(template);
           })
           .catch((error) => {
@@ -225,7 +216,6 @@ export class RegisterComponent implements OnInit {
       empresa: z.object({
         ds_nome_fantasia: z.string(),
         co_entidade_registro: z.number(),
-        // co_natureza_juridica: z.number(),
         endereco: z.object({
           co_cep: z.number(),
           ds_logradouro: z.string(),
@@ -240,7 +230,6 @@ export class RegisterComponent implements OnInit {
 
     try {
       const parsedCompany = companySchema.parse(company);
-      console.log('Parsed Company:', parsedCompany);
       this.registerForm.patchValue({
         id: parsedCompany.id,
         ds_responsavel: parsedCompany.solicitante.ds_responsavel,
@@ -248,7 +237,6 @@ export class RegisterComponent implements OnInit {
         date_nascimento: parsedCompany.solicitante.date_nascimento,
         ds_nome_fantasia: parsedCompany.empresa.ds_nome_fantasia,
         co_entidade_registro: parsedCompany.empresa.co_entidade_registro,
-        // co_natureza_juridica: parsedCompany.empresa.co_natureza_juridica,
         co_cep: parsedCompany.empresa.endereco.co_cep,
         ds_logradouro: parsedCompany.empresa.endereco.ds_logradouro,
         ds_complemento: parsedCompany.empresa.endereco.ds_complemento,
@@ -257,7 +245,6 @@ export class RegisterComponent implements OnInit {
         co_uf: parsedCompany.empresa.endereco.co_uf,
         co_numero: parsedCompany.empresa.endereco.co_numero,
       });
-      console.log('Form Values after patch:', this.registerForm.value);
     } catch (e) {
       console.error('Erro ao validar os dados da empresa: ', e);
     }
