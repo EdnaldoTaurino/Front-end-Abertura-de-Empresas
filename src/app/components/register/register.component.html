@@ -1,1 +1,189 @@
-<p>register works!</p>
+<app-header />
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <!-- Coluna Esquerda: Dados do Solicitante -->
+    <div class="col-md-6">
+      <h3>Dados do solicitante</h3>
+      <div class="mb-3">
+        <label for="responsible-person" class="form-label"
+          >Responsável pela empresa*</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="responsible-person"
+          formControlName="responsiblePerson"
+        />
+        <div *ngIf="validationErrors['responsiblePerson']" class="text-danger">
+          {{ validationErrors["responsiblePerson"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="responsible-person-cpf" class="form-label">CPF*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="responsible-person-cpf"
+          formControlName="cpf"
+        />
+        <div *ngIf="validationErrors['cpf']" class="text-danger">
+          {{ validationErrors["cpf"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="birth-date" class="form-label">Data nascimento*</label>
+        <input
+          type="date"
+          class="form-control"
+          id="birth-date"
+          formControlName="birthDate"
+        />
+        <div *ngIf="validationErrors['birthDate']" class="text-danger">
+          {{ validationErrors["birthDate"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="zip-code" class="form-label">CEP</label>
+        <input
+          type="text"
+          class="form-control"
+          id="zip-code"
+          formControlName="zipCode"
+        />
+        <div *ngIf="validationErrors['zipCode']" class="text-danger">
+          {{ validationErrors["zipCode"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Endereço*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          formControlName="address"
+        />
+        <div *ngIf="validationErrors['address']" class="text-danger">
+          {{ validationErrors["address"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="neighborhood" class="form-label">Bairro*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="neighborhood"
+          formControlName="neighborhood"
+        />
+        <div *ngIf="validationErrors['neighborhood']" class="text-danger">
+          {{ validationErrors["neighborhood"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="complement" class="form-label">Complemento</label>
+        <input
+          type="text"
+          class="form-control"
+          id="complement"
+          formControlName="complement"
+        />
+      </div>
+    </div>
+
+    <!-- Linha de Separação -->
+    <div class="col-md-1 d-flex align-items-center">
+      <div class="border-start border-primary border-3 h-100"></div>
+    </div>
+
+    <!-- Coluna Direita: Dados da Empresa -->
+    <div class="col-md-5">
+      <h3>Dados da empresa</h3>
+      <div class="mb-3">
+        <label for="company-name" class="form-label">Nome fantasia*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="company-name"
+          formControlName="companyName"
+        />
+        <div *ngIf="validationErrors['companyName']" class="text-danger">
+          {{ validationErrors["companyName"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">Cidade*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          formControlName="city"
+        />
+        <div *ngIf="validationErrors['city']" class="text-danger">
+          {{ validationErrors["city"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Escolha sua entidade de registro*</label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="companyType"
+            id="company-type-1"
+            value="option1"
+            formControlName="companyType"
+          />
+          <label class="form-check-label" for="company-type-1">Cartório</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="companyType"
+            id="company-type-2"
+            value="option2"
+            formControlName="companyType"
+          />
+          <label class="form-check-label" for="company-type-2"
+            >Junta Comercial</label
+          >
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="companyType"
+            id="company-type-3"
+            value="option3"
+            formControlName="companyType"
+          />
+          <label class="form-check-label" for="company-type-3">OAB</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="companyType"
+            id="company-type-4"
+            value="option4"
+            formControlName="companyType"
+          />
+          <label class="form-check-label" for="company-type-4">RFB</label>
+        </div>
+        <div *ngIf="validationErrors['companyType']" class="text-danger">
+          {{ validationErrors["companyType"] }}
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="state" class="form-label">Estado*</label>
+        <select class="form-control" id="state" formControlName="state">
+          <option value="">Select a state</option>
+          <!-- Add options for states -->
+        </select>
+        <div *ngIf="validationErrors['state']" class="text-danger">
+          {{ validationErrors["state"] }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+</form>

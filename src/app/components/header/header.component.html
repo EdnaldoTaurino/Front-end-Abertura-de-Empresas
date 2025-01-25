@@ -5,12 +5,14 @@
         <img src="vox-logo.png" alt="VOX" class="logo" />
         <h2 class="title">Pedidos de Abertura da empresa</h2>
       </div>
+      @if (hideButton()) {
       <div class="button-container">
-        <button class="btn btn-primary" (click)="navigateToRegiter()">
+        <button class="btn btn-primary" (click)="navigateToRegister()">
           <i class="bi bi-plus-circle"></i>
           Solicitar Abertura
         </button>
       </div>
+      }
     </div>
   </div>
 </header>

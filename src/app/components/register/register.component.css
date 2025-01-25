@@ -1,0 +1,14 @@
+/* Estilização básica para o formulário */
+form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Estilização para a linha de separação */
+.border-start {
+  border-left-width: 3px !important;
+}

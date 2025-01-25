@@ -20,7 +20,7 @@
             </div>
             <button
               class="btn btn-primary ms-auto"
-              (click)="visualizarEmpresa(company)"
+              (click)="getCompanyId(company)"
             >
               <i class="bi bi-eye me-2"></i>
               Visualizar
@@ -40,7 +40,10 @@
     <div class="col-md-6">
       <div class="d-flex align-items-center mb-3">
         <h5 class="mb-0 text-primary">Detalhes do pedido</h5>
-        <button class="btn btn-secondary ms-auto" (click)="editarEmpresa()">
+        <button
+          class="btn btn-secondary ms-auto"
+          (click)="editarEmpresa(selectedCompany)"
+        >
           <i class="bi bi-pencil"></i> Editar
         </button>
       </div>

@@ -12,7 +12,11 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 export class HeaderComponent {
   constructor(private router: Router) {}
 
-  navigateToRegiter() {
+  hideButton(): boolean {
+    return this.router.url === '/home' || this.router.url === '/';
+  }
+
+  navigateToRegister() {
     this.router.navigate(['/register']);
   }
 }

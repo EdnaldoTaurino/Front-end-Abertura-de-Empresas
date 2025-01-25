@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Companies } from '../../interfaces/Icompanies';
 import { CompaniesService } from '../../service/companies.service';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import axios from 'axios';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   imports: [HeaderComponent, FormsModule],
   providers: [CompaniesService],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   Companies: Companies[] = [];
@@ -20,7 +22,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private companiesService: CompaniesService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -28,25 +31,35 @@ export class HomeComponent implements OnInit {
   }
 
   getCompanies(): void {
-    this.companiesService.getCompanies().subscribe({
-      next: (data: Companies[]) => {
-        console.log('Dados recebidos MOCK: ', data);
-        this.Companies = data;
+    axios
+      .get<Companies[]>('http://localhost:3000/empresas')
+      .then((response) => {
+        console.log('Dados recebidos via GET: ', response.data);
+        this.Companies = response.data;
         this.filteredCompanies = this.Companies.filter(
           (company) => company.solicitante && company.empresa
         );
-      },
-      error: (err: any) => console.log('erro ao buscar empresas', err),
-    });
+      })
+      .catch((error) => {
+        console.log('erro ao buscar empresas', error);
+      });
   }
 
-  visualizarEmpresa(company: Companies) {
-    this.selectedCompany = company;
+  getCompanyId(company: Companies) {
+    axios
+      .get<Companies>(`http://localhost:3000/empresas/${company.id}`)
+      .then((response) => {
+        this.selectedCompany = response.data;
+        console.log('Dados recebidos via GET: ', response.data);
+      })
+      .catch((error) => {
+        console.log('erro ao buscar empresa', error);
+      });
   }
 
-  editarEmpresa() {
+  editarEmpresa(company: Companies) {
     this.router.navigate(['/edit-company'], {
-      queryParams: { company: JSON.stringify(this.selectedCompany) },
+      queryParams: { id: company.id },
     });
   }
 }
