@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import {
   FormBuilder,
@@ -11,11 +11,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import axios from 'axios';
 import { z } from 'zod';
+import { ModalModule, BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [HeaderComponent, CommonModule, ReactiveFormsModule],
+  imports: [HeaderComponent, CommonModule, ReactiveFormsModule, ModalModule],
+  providers: [BsModalService],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
@@ -24,11 +26,13 @@ export class RegisterComponent implements OnInit {
   validationErrors: { [key: string]: string } = {};
   entidadeRegistroOptions: any[] = [];
   estados: any[] = [];
+  modalRef?: BsModalRef;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) {
     this.registerForm = this.fb.group({
       ds_responsavel: ['', Validators.required],
@@ -44,7 +48,7 @@ export class RegisterComponent implements OnInit {
       co_uf: ['', Validators.required],
     });
   }
-  // Entidade de Registro
+
   ngOnInit(): void {
     this.fetchEntidadeRegistroOptions();
     this.fetchEstados();
@@ -111,7 +115,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  onSubmit(template: TemplateRef<any>): void {
     if (this.validateForm()) {
       const formData = {
         solicitante: {
@@ -137,14 +141,24 @@ export class RegisterComponent implements OnInit {
         .post('http://localhost:3000/empresas', formData)
         .then((response) => {
           console.log('Dados enviados com sucesso: ', response.data);
-          // Redirecionar para a página inicial após o envio bem-sucedido
-          this.router.navigate(['/home']);
+          this.openModal(template);
         })
         .catch((error) => {
           console.error('Erro ao enviar dados: ', error);
         });
     } else {
-      console.log('Form is invalid');
+      console.log('Form is invalid: ', this.validationErrors);
+    }
+  }
+
+  openModal(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeModalAndNavigate(): void {
+    if (this.modalRef) {
+      this.modalRef.hide();
+      this.router.navigate(['/']);
     }
   }
 
