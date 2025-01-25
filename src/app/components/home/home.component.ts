@@ -16,8 +16,8 @@ import axios from 'axios';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  Companies: Companies[] = [];
-  filteredCompanies: any[] = [];
+  companies: Companies[] = [];
+  filteredCompanies: Companies[] = [];
   selectedCompany: Companies | null = null;
 
   constructor(
@@ -35,31 +35,35 @@ export class HomeComponent implements OnInit {
       .get<Companies[]>('http://localhost:3000/empresas')
       .then((response) => {
         console.log('Dados recebidos via GET: ', response.data);
-        this.Companies = response.data;
-        this.filteredCompanies = this.Companies.filter(
-          (company) => company.solicitante && company.empresa
+        this.companies = response.data.filter(
+          (company) =>
+            company.solicitante?.ds_responsavel &&
+            company.empresa?.ds_nome_fantasia
         );
+        this.filteredCompanies = this.companies;
       })
       .catch((error) => {
-        console.log('erro ao buscar empresas', error);
+        console.error('Erro ao buscar empresas: ', error);
       });
   }
 
-  getCompanyId(company: Companies) {
-    axios
-      .get<Companies>(`http://localhost:3000/empresas/${company.id}`)
-      .then((response) => {
-        this.selectedCompany = response.data;
-        console.log('Dados recebidos via GET: ', response.data);
-      })
-      .catch((error) => {
-        console.log('erro ao buscar empresa', error);
-      });
+  filterCompanies(criteria: string): void {
+    this.filteredCompanies = this.companies.filter(
+      (company) =>
+        company.empresa.ds_nome_fantasia
+          .toLowerCase()
+          .includes(criteria.toLowerCase()) ||
+        company.solicitante.ds_responsavel
+          .toLowerCase()
+          .includes(criteria.toLowerCase())
+    );
   }
 
-  editarEmpresa(company: Companies) {
-    this.router.navigate(['/edit-company'], {
-      queryParams: { id: company.id },
-    });
+  selectCompany(company: Companies): void {
+    this.selectedCompany = company;
+  }
+
+  editarEmpresa(company: Companies): void {
+    this.router.navigate(['/register'], { state: { company } });
   }
 }

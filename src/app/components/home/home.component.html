@@ -13,14 +13,14 @@
               </div>
               <div class="ms-3">
                 <div>
-                  <strong>{{ company.solicitante.ds_responsavel }}</strong>
+                  <strong>{{ company?.solicitante?.ds_responsavel }}</strong>
                 </div>
-                <div>{{ company.empresa.ds_nome_fantasia }}</div>
+                <div>{{ company?.empresa?.ds_nome_fantasia }}</div>
               </div>
             </div>
             <button
               class="btn btn-primary ms-auto"
-              (click)="getCompanyId(company)"
+              (click)="selectCompany(company)"
             >
               <i class="bi bi-eye me-2"></i>
               Visualizar

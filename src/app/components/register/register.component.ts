@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import axios from 'axios';
 import { z } from 'zod';
-import { ModalModule, BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-register',
@@ -47,6 +47,13 @@ export class RegisterComponent implements OnInit {
       ds_municipio: ['', Validators.required],
       co_uf: ['', Validators.required],
     });
+
+    const navigation = this.router.getCurrentNavigation();
+
+    const state = navigation?.extras.state as { company: any };
+    if (state && state.company) {
+      this.populateForm(state.company);
+    }
   }
 
   ngOnInit(): void {
@@ -89,9 +96,9 @@ export class RegisterComponent implements OnInit {
       co_entidade_registro: z
         .union([z.string().nonempty('Este campo é obrigatório.'), z.number()])
         .transform(String),
-      co_cep: z.string().nonempty('Este campo é obrigatório.'),
+      co_cep: z.union([z.string(), z.number()]).transform(String),
       ds_logradouro: z.string().nonempty('Este campo é obrigatório.'),
-      ds_complemento: z.string().optional(),
+      ds_complemento: z.union([z.string(), z.null()]).optional(),
       ds_bairro: z.string().nonempty('Este campo é obrigatório.'),
       ds_municipio: z.string().nonempty('Este campo é obrigatório.'),
       co_uf: z.string().nonempty('Este campo é obrigatório.'),
@@ -158,8 +165,25 @@ export class RegisterComponent implements OnInit {
   closeModalAndNavigate(): void {
     if (this.modalRef) {
       this.modalRef.hide();
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     }
+  }
+
+  populateForm(company: any): void {
+    this.registerForm.patchValue({
+      ds_responsavel: company.solicitante.ds_responsavel,
+      nu_cpf: company.solicitante.nu_cpf,
+      date_nascimento: company.solicitante.date_nascimento,
+      ds_nome_fantasia: company.empresa.ds_nome_fantasia,
+      co_entidade_registro: company.empresa.co_entidade_registro,
+      co_cep: company.empresa.endereco.co_cep,
+      ds_logradouro: company.empresa.endereco.ds_logradouro,
+      ds_complemento: company.empresa.endereco.ds_complemento,
+      ds_bairro: company.empresa.endereco.ds_bairro,
+      ds_municipio: company.empresa.endereco.ds_municipio,
+      co_uf: company.empresa.endereco.co_uf,
+      co_numero: company.empresa.endereco.co_numero,
+    });
   }
 
   isFieldInvalid(field: string): boolean {
