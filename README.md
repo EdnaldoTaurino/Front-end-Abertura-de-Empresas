@@ -1,5 +1,3 @@
-# Teste Vox Tecnologia
-
 ## Descrição do Projeto
 
 Este projeto foi desenvolvido utilizando o **Angular 19**, explorando as novidades da versão, como as novas sintaxes (`@if`, `@for`) e aplicando boas práticas de clean code e organização de componentes. O objetivo foi criar uma aplicação funcional e com uma estrutura limpa e escalável, seguindo as diretrizes propostas.
