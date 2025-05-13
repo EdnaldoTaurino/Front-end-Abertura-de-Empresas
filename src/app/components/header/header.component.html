@@ -3,10 +3,11 @@
     <div class="header-container">
       <div class="header-content">
         <img
-          src="vox-logo.jpeg"
-          alt="VOX"
+          src="logo.png"
+          alt="Logo"
           class="logo"
-          style="width: 100px; height: 100px"
+          style="width: 100px; height: 100px; border-radius: 50%; cursor: pointer"
+          (click)="goHome()"
         />
         @if(hideEditcompany()){
         <h2 class="title">Pedidos de Abertura da empresa</h2>

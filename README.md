@@ -1,6 +1,6 @@
 ## Descrição do Projeto
 
-Este projeto foi desenvolvido utilizando o **Angular 19**, explorando as novidades da versão, como as novas sintaxes (`@if`, `@for`) e aplicando boas práticas de clean code e organização de componentes. O objetivo foi criar uma aplicação funcional e com uma estrutura limpa e escalável, seguindo as diretrizes propostas.
+Este projeto foi desenvolvido utilizando o **Angular 19**, explorando as novidades da versão, como as novas sintaxes (`@if`, `@for`) e aplicando boas práticas de clean code e organização de componentes.
 
 ---
 
@@ -37,28 +37,9 @@ Este projeto foi desenvolvido utilizando o **Angular 19**, explorando as novidad
 
 - Implementação de UUID para geração de IDs randômicos, garantindo maior segurança.
 
----
+### 8. **MOCK**
 
-## Melhorias Realizadas
-
-- **UUID para IDs randômicos mais seguros**.
-- **Máscaras** para **CPF** e **CEP**.
-- **Validações** com **ZOD**.
-- **Chamadas HTTP** com **Axios**.
-
-- Sugestão de melhorias:
-  - Alteração de algumas chamadas HTTP de **PATCH** para **PUT**, dependendo da necessidade de envio de dados (caso apenas um campo precise ser atualizado, o **PATCH** seria ideal).
-  - Uso de bibliotecas modernas de UI para facilitar a implementação e melhorar a aparência visual da aplicação.
-
----
-
-## Funcionalidades Não Implementadas
-
-Conforme solicitado, o foco foi dado ao bom funcionamento dos elementos e à proximidade do layout proposto. Algumas funcionalidades e bibliotecas não foram incluídas para evitar poluição do código:
-
-- **Rota PUT e DELETE**: Não implementadas, pois não foram solicitadas no escopo do projeto.
-- **Bibliotecas Adicionais**: Algumas bibliotecas interessantes não foram utilizadas para manter o projeto limpo.
-- **Campo número**: Não implementado, pois não foi especificado no escopo do projeto.
+- Um back end mockado com json server
 
 ---
 
@@ -66,7 +47,7 @@ Conforme solicitado, o foco foi dado ao bom funcionamento dos elementos e à pro
 
 ### Pré-requisitos
 
-- Node.js 20
+- Node.js 20+
 - Angular CLI 19
 
 ### Passos para executar

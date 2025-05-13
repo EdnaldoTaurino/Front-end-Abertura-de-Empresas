@@ -23,4 +23,8 @@ export class HeaderComponent {
   navigateToRegister() {
     this.router.navigate(['/register']);
   }
+
+  goHome() {
+    this.router.navigate(['/']);
+  }
 }

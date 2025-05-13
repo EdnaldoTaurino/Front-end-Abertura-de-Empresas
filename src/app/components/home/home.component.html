@@ -18,13 +18,15 @@
                 <div>{{ company?.empresa?.ds_nome_fantasia }}</div>
               </div>
             </div>
-            <button
-              class="btn btn-primary ms-auto"
-              (click)="selectCompany(company)"
-            >
-              <i class="bi bi-eye me-2"></i>
-              Visualizar
-            </button>
+            <div class="button-container">
+              <button
+                class="btn btn-primary ms-auto"
+                (click)="selectCompany(company)"
+              >
+                <i class="bi bi-eye me-2"></i>
+                Visualizar
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -47,7 +49,8 @@
           <i class="bi bi-pencil"></i> Editar
         </button>
       </div>
-      <div class="border-start border-primary border-3 ps-3"> <!-- Borda azul -->
+      <div class="border-start border-primary border-3 ps-3">
+        <!-- Borda azul -->
         <div class="d-flex align-items-center mb-4 ml-4">
           <div class="icon-container">
             <i class="bi-person-fill"></i>
