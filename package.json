@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "mock": "npx json-server --watch src/mocks/db.json",
+    "vercel-build": "npm run build",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
