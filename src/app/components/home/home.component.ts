@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { Companies } from '../../interfaces/Icompanies';
 import { CompaniesService } from '../../service/companies.service';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MaskCpfPipe, MaskCepPipe } from '../../../pipes/mask-cpf.pipe';
 import axios from 'axios';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,9 @@ import axios from 'axios';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;
+  confirmCompany: Companies | null = null;
+
   companies: Companies[] = [];
   filteredCompanies: Companies[] = [];
   selectedCompany: Companies | null = null;
@@ -24,7 +28,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private companiesService: CompaniesService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +49,32 @@ export class HomeComponent implements OnInit {
       })
       .catch((error) => {
         console.error('Erro ao buscar empresas: ', error);
+      });
+  }
+
+  openRemoveModal(company: Companies): void {
+    this.confirmCompany = company;
+    this.modalService
+      .open(this.confirmModal)
+      .result.then(() => this.confirmRemove(company))
+      .catch(() => {});
+  }
+
+  private confirmRemove(company: Companies): void {
+    axios
+      .delete(`http://localhost:3000/empresas/${company.id}`)
+      .then(() => {
+        this.companies = this.companies.filter((c) => c.id !== company.id);
+        this.filteredCompanies = this.filteredCompanies.filter(
+          (c) => c.id !== company.id
+        );
+        if (this.selectedCompany?.id === company.id) {
+          this.selectedCompany = null;
+        }
+      })
+      .catch((err) => {
+        console.error('Erro ao remover empresa:', err);
+        alert('Não foi possível remover a empresa.');
       });
   }
 

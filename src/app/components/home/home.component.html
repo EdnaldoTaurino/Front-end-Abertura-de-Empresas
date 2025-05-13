@@ -5,7 +5,7 @@
       @if (filteredCompanies.length > 0) { @for (company of filteredCompanies;
       track $index) {
       <div class="card mb-3">
-        <div class="card-body p-3">
+        <div class="card-body p-3 position-relative">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="icon-container">
@@ -20,15 +20,24 @@
             </div>
             <div class="button-container">
               <button
-                class="btn btn-primary ms-auto"
+                class="btn btn-primary"
                 (click)="selectCompany(company)"
+                title="Visualizar"
+                aria-label="Visualizar"
               >
-                <i class="bi bi-eye me-2"></i>
-                Visualizar
+                <i class="bi bi-eye"></i>
+                <!-- texto só visível em telas maiores -->
+                <span class="btn-text ms-1">Visualizar</span>
               </button>
             </div>
           </div>
         </div>
+        <button
+          class="btn btn-danger floating-delete"
+          (click)="openRemoveModal(company)"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
       </div>
       } } @else {
       <div class="alert alert-info">
@@ -36,6 +45,32 @@
       </div>
       }
     </div>
+
+    <!-- MODAL CONFIRMAÇÃO DELETAR -->
+    <ng-template #confirmModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-center">Confirmar Remoção</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="modal.dismiss()"
+        ></button>
+      </div>
+      <div class="ms-3 d-flex flex-column">
+        <div class="align-itens: center mb-2">Deseja remover:</div>
+        <strong>{{ confirmCompany?.solicitante?.ds_responsavel }}</strong>
+        <strong>{{ confirmCompany?.empresa?.ds_nome_fantasia }}</strong>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="modal.dismiss()">
+          Cancelar
+        </button>
+        <button class="btn btn-danger" (click)="modal.close()">Remover</button>
+      </div>
+    </ng-template>
+    <!-- MODAL CONFIRMAÇÃO DELETAR -->
 
     <!-- Coluna Direita (50%) -->
     @if (selectedCompany) {
