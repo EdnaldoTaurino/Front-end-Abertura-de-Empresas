@@ -7,7 +7,9 @@ import { Companies } from '../interfaces/Icompanies';
   providedIn: 'root',
 })
 export class CompaniesService {
-  private apiUrl = 'http://localhost:3000/empresas';
+  private apiUrl = '/empresas';
+  // usando o json-server local
+  // private apiUrl = 'http://localhost:3000/empresas';
 
   constructor(private http: HttpClient) {}
 
