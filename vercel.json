@@ -4,15 +4,17 @@
     {
       "src": "server.js",
       "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["db.json"]
-      }
+      "config": { "includeFiles": ["db.json"] }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist/empresas" }
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
-    }
+    { "src": "/empresas(.*)", "dest": "server.js" },
+
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
