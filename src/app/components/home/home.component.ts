@@ -20,7 +20,7 @@ import { environment } from '../../../environments/environment';
 })
 export class HomeComponent implements OnInit {
   // URL da API
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiEmpresas;
 
   @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;
   confirmCompany: Companies | null = null;

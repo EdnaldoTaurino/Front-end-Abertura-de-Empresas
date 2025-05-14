@@ -17,6 +17,7 @@ import { z } from 'zod';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { v4 as uuidv4 } from 'uuid';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -33,6 +34,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  private apiUrl = environment.apiEntidadesRegistro;
   registerForm: FormGroup;
   validationErrors: { [key: string]: string } = {};
   entidadeRegistroOptions: any[] = [];
@@ -75,7 +77,7 @@ export class RegisterComponent implements OnInit {
   }
 
   fetchEntidadeRegistroOptions(): void {
-    this.http.get<any[]>('http://localhost:3000/entidade-registro').subscribe({
+    this.http.get<any[]>(this.apiUrl).subscribe({
       next: (data) => {
         this.entidadeRegistroOptions = data;
       },
