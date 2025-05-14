@@ -35,6 +35,8 @@ import { environment } from '../../../environments/environment';
 })
 export class RegisterComponent implements OnInit {
   private apiUrl = environment.apiEntidadesRegistro;
+  private apiEmpresas = environment.apiEmpresas;
+
   registerForm: FormGroup;
   validationErrors: { [key: string]: string } = {};
   entidadeRegistroOptions: any[] = [];
@@ -173,7 +175,7 @@ export class RegisterComponent implements OnInit {
       if (companyId) {
         // Atualizar empresa existente
         axios
-          .put(`http://localhost:3000/empresas/${companyId}`, formData)
+          .put(`${this.apiEmpresas}${companyId}`, formData)
           .then((response) => {
             this.openModal(template);
           })
@@ -183,7 +185,7 @@ export class RegisterComponent implements OnInit {
       } else {
         // Criar nova empresa
         axios
-          .post('http://localhost:3000/empresas', formData)
+          .post(this.apiEmpresas, formData)
           .then((response) => {
             this.openModal(template);
           })
