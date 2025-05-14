@@ -3,9 +3,9 @@
   "devCommand": "npm run start -- --port 4200",
   "builds": [
     {
-      "src": "api/server.js",
+      "src": "server.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["src/mocks/db.json"] }
+      "config": { "includeFiles": ["db.json"] }
     },
     {
       "src": "package.json",
@@ -14,7 +14,7 @@
     }
   ],
   "routes": [
-    { "src": "/empresas(.*)", "dest": "/api/server.js" },
+    { "src": "/empresas(.*)", "dest": "server.js" }, 
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }

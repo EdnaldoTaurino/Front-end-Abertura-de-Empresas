@@ -19,7 +19,9 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  private apiUrl = `${environment.apiBase}:${environment.apiPort}/empresas`;
+  // URL da API
+  private apiUrl = `${environment.apiBase}:${environment.apiPort}`;
+
   @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;
   confirmCompany: Companies | null = null;
 
