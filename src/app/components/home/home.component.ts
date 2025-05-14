@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MaskCpfPipe, MaskCepPipe } from '../../../pipes/mask-cpf.pipe';
 import axios from 'axios';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  private apiUrl = `${environment.apiBase}:${environment.apiPort}/empresas`;
   @ViewChild('confirmModal') confirmModal!: TemplateRef<any>;
   confirmCompany: Companies | null = null;
 
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   getCompanies(): void {
     axios
-      .get<Companies[]>('http://localhost:3000/empresas')
+      .get<Companies[]>(this.apiUrl)
       .then((response) => {
         this.companies = response.data.filter(
           (company) =>
@@ -62,7 +64,7 @@ export class HomeComponent implements OnInit {
 
   private confirmRemove(company: Companies): void {
     axios
-      .delete(`http://localhost:3000/empresas/${company.id}`)
+      .delete(`${this.apiUrl}/${company.id}`)
       .then(() => {
         this.companies = this.companies.filter((c) => c.id !== company.id);
         this.filteredCompanies = this.filteredCompanies.filter(

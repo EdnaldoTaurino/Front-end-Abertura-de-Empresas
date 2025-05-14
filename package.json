@@ -2,11 +2,11 @@
   "name": "empresas",
   "version": "0.0.0",
   "scripts": {
-    "mock": "npx json-server --watch src/mocks/db.json",
-    "vercel-build": "npm run build",
+    "build": "ng build --configuration production",
+    "mock": "npx json-server --watch db.json",
+    "server": "npx json-server --watch db.json --port 8080",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:empresas": "node dist/empresas/server/server.mjs"
