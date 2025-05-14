@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/json-server.js",
+      "src": "api/server.js",
       "use": "@vercel/node",
       "config": {
         "includeFiles": ["src/mocks/db.json"]
       }
     }
   ],
-  "routes": [{ "src": "/api/(.*)", "dest": "api/json-server.js" }]
+  "routes": [{ "src": "/api/(.*)", "dest": "api/server.js" }]
 }
