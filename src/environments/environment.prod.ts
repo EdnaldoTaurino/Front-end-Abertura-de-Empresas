@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiPort: 80,
-  apiUrl: 'https://testebackapi.vercel.app/',
+  apiBase: 'https://abertura-de-empresas.vercel.app',
+  apiPort: 4443,
+  apiUrl: 'https://abertura-de-empresas.vercel.app/empresas',
 };
